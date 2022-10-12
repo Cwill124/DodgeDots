@@ -3,7 +3,7 @@
     /// <summary>
     ///     For what direction that the dot wave will be facing
     /// </summary>
-    public enum DirectionFacing
+    public enum Direction
     {
         /// <summary>The north</summary>
         North,

@@ -8,15 +8,16 @@ namespace DodgeDots.Model
     /// </summary>
     public class EnemyDot : GameObject
     {
+        
         #region Constructors
 
         /// <summary>Initializes a new instance of the <see cref="EnemyDot" /> class.</summary>
         /// <param name="xSpeed">The x speed.</param>
         /// <param name="ySpeed">The y speed.</param>
-        /// <param name="directionFacing">The direction facing.</param>
-        public EnemyDot(int xSpeed, int ySpeed, DirectionFacing directionFacing)
+        /// <param name="direction">The direction facing.</param>
+        public EnemyDot(int xSpeed, int ySpeed, Direction direction)
         {
-            if (directionFacing == DirectionFacing.North || directionFacing == DirectionFacing.South)
+            if (direction == Direction.North || direction == Direction.South)
             {
                 Sprite = new NorthSouthBallSprite();
             }

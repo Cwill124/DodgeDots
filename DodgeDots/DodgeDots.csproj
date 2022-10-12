@@ -120,7 +120,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameValues\DirectionFacing.cs" />
+    <Compile Include="GameValues\Direction.cs" />
     <Compile Include="Model\DotWaveManager.cs" />
     <Compile Include="Model\EnemyDot.cs" />
     <Compile Include="Model\GameManager.cs" />

@@ -33,7 +33,7 @@ namespace DodgeDots.Model
 
         private Canvas canvas;
 
-        private readonly DotWaveManager dotWaveManager;
+        private DotWaveManager dotWaveManager;
 
         private int tickCount;
 
@@ -65,7 +65,7 @@ namespace DodgeDots.Model
             this.random = new Random();
             this.backgroundHeight = backgroundHeight;
             this.backgroundWidth = backgroundWidth;
-            this.dotWaveManager = new DotWaveManager();
+            this.dotWaveManager = null;
             this.timer = new DispatcherTimer();
 
             this.timer.Tick += this.Timer_Tick;
@@ -113,13 +113,15 @@ namespace DodgeDots.Model
 
         private void Timer_Tick(object sender, object e)
         {
-            var speedOfGame = 4;
+            var speedOfGame = 2;
             this.tickCount++;
 
             if (this.tickCount % speedOfGame == 0)
             {
+                
+                this.dotWaveManager.StartNorthWave();
                 this.manageDotWave(NorthWave);
-
+                
                 if (this.winTickCount >= FiveSeconds)
                 {
                     this.manageDotWave(WestWave);
@@ -172,8 +174,10 @@ namespace DodgeDots.Model
         public void InitializeGame(Canvas background)
         {
             this.canvas = background ?? throw new ArgumentNullException(nameof(background));
+            this.dotWaveManager = new DotWaveManager(background);
             this.createAndPlacePlayer(background);
-            this.createAndPlaceDots(background);
+            
+            
         }
 
         private void createAndPlacePlayer(Canvas background)
@@ -197,7 +201,7 @@ namespace DodgeDots.Model
         private void createAndPlaceNorthDots(Canvas background)
         {
             var x = 0;
-            this.dotWaveManager.waves[NorthWave].CreateDots();
+            this.dotWaveManager.waves[NorthWave].CreateDot();
             foreach (var currentDot in this.dotWaveManager.waves[NorthWave].dots)
             {
                 var yVariation = this.random.Next(-40, 20);
@@ -211,7 +215,7 @@ namespace DodgeDots.Model
         private void createAndPlaceWestDots(Canvas background)
         {
             var y = 0;
-            this.dotWaveManager.waves[WestWave].CreateDots();
+            this.dotWaveManager.waves[WestWave].CreateDot();
             foreach (var currentDot in this.dotWaveManager.waves[WestWave].dots)
             {
                 var xVariation = this.random.Next(-40, 20);
@@ -225,7 +229,7 @@ namespace DodgeDots.Model
         private void createAndPlacesSouthDots(Canvas background)
         {
             var x = 0;
-            this.dotWaveManager.waves[SouthWave].CreateDots();
+            this.dotWaveManager.waves[SouthWave].CreateDot();
             foreach (var currentDot in this.dotWaveManager.waves[SouthWave].dots)
             {
                 var yVariation = this.random.Next(-20, 40);
@@ -327,20 +331,21 @@ namespace DodgeDots.Model
 
         private void moveDotWave(int index, EnemyDot currentDot)
         {
-            switch (index)
+            if (index == NorthWave)
             {
-                case NorthWave:
-                    currentDot.MoveDown();
-                    break;
-                case WestWave:
-                    currentDot.MoveRight();
-                    break;
-                case SouthWave:
-                    currentDot.MoveUp();
-                    break;
-                default:
-                    currentDot.MoveLeft();
-                    break;
+                currentDot.MoveDown();
+            }
+            else if (index == WestWave)
+            {
+                currentDot.MoveRight();
+            }
+            else if (index == SouthWave)
+            {
+                currentDot.MoveUp();
+            }
+            else
+            {
+                currentDot.MoveLeft();
             }
         }
 

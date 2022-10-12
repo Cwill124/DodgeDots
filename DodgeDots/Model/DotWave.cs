@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows.ApplicationModel.Calls.Background;
+using Windows.UI.Xaml;
 using DodgeDots.GameValues;
+using Windows.UI.Xaml.Controls;
 
 namespace DodgeDots.Model
 {
@@ -13,109 +16,51 @@ namespace DodgeDots.Model
 
         private const int MinSpeed = 1;
         private const int MaxSpeed = 4;
-        private readonly DirectionFacing directionFacing;
+        public Direction direction { get; }
         private readonly Random random;
         public  IList<EnemyDot> dots { get; }
+        private Canvas background;
+
 
         #endregion
 
         #region Constructors
 
         /// <summary>Initializes a new instance of the <see cref="DotWave" /> class.</summary>
-        /// <param name="directionFacing">The direction facing.</param>
-        public DotWave(DirectionFacing directionFacing)
+        /// <param name="direction">The direction facing.</param>
+        public DotWave(Direction direction, Canvas background)
         {
-            this.directionFacing = directionFacing;
+            this.direction = direction;
             this.random = new Random();
             this.dots = new List<EnemyDot>();
+            this.background = background;
+
         }
+
+        
 
         #endregion
 
         #region Methods
 
-        /// <summary>Adds the dots to the Wave.</summary>
-        /// <postCondition>dots.Count == 11</postCondition>
-        public void CreateDots()
+        public void CreateDot()
         {
-            if (this.directionFacing == DirectionFacing.North || this.directionFacing == DirectionFacing.South)
+            var random=0;
+            if (this.direction == Direction.North)
             {
-                this.addNorthAndSouthDots();
-            }
-            else if (this.directionFacing == DirectionFacing.West || this.directionFacing == DirectionFacing.East)
-            {
-                this.addWestAndEastDots();
-            }
-        }
-        private void addNorthAndSouthDots()
-        {
-            var amount = 11;
-            var x = 0;
-            var y = 0;
-            y = this.checkForNorthOrSouth(y);
-            for (var i = 0; i < amount; i++)
-            {
-
-                var random = this.random.Next(MinSpeed, MaxSpeed);
-                var dot = new EnemyDot(random, random, this.directionFacing)
-                {
-                    X = x,
-                    Y = y
-                };
+                random = this.random.Next(MinSpeed,MaxSpeed);
+                var dot = new EnemyDot(0, random, this.direction);
+                random = this.random.Next(0, 370);
+                dot.X = random;
+                dot.Y = -30;
                 this.dots.Add(dot);
-                x += 40;
+                this.background.Children.Add(dot.Sprite);
             }
+            
         }
-
-        private void addWestAndEastDots()
-        {
-            var amount = 11;
-            var x = 0;
-            var y = 0;
-            x = this.checkForWestOrEast(x);
-            for (var i = 0; i < amount; i++)
-            {
-                var random = this.random.Next(MinSpeed, MaxSpeed);
-                var dot = new EnemyDot(random, random, this.directionFacing)
-                {
-                    X = x,
-                    Y = y
-                };
-                this.dots.Add(dot);
-                y += 40;
-            }
-        }
-
-        private int checkForWestOrEast(int x)
-        {
-            switch (this.directionFacing)
-            {
-                case DirectionFacing.North:
-                    x = -40;
-                    break;
-                case DirectionFacing.South:
-                    x = 440;
-                    break;
-            }
-
-            return x;
-        }
-
-        private int checkForNorthOrSouth(int y)
-        {
-            switch (this.directionFacing)
-            {
-                case DirectionFacing.North:
-                    y = -10;
-                    break;
-                case DirectionFacing.South:
-                    y = 440;
-                    break;
-            }
-
-            return y;
-        }
+        
 
         #endregion
     }
+   
 }
