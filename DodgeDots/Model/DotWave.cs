@@ -45,48 +45,66 @@ namespace DodgeDots.Model
 
         public void CreateDot()
         {
-            var random=0;
-            if (this.direction == Direction.North)
+            switch (this.direction)
             {
-                random = this.random.Next(MinSpeed,MaxSpeed);
-                var dot = new EnemyDot(0, random, this.direction);
-                random = this.random.Next(0, 370);
-                dot.X = random;
-                dot.Y = -30;
-                this.dots.Add(dot);
-                this.background.Children.Add(dot.Sprite);
-            }else if (this.direction == Direction.West)
-            {
-                random = this.random.Next(MinSpeed, MaxSpeed);
-                var dot = new EnemyDot(random, 0, this.direction);
-                random = this.random.Next(0, 370);
-                dot.X = -30;
-                dot.Y = random;
-                this.dots.Add(dot);
-                this.background.Children.Add(dot.Sprite);
-            } else if (this.direction == Direction.South)
-            {
-                random = this.random.Next(MinSpeed, MaxSpeed);
-                var dot = new EnemyDot(0, random, this.direction);
-                random = this.random.Next(0, 370);
-                dot.X = random;
-                dot.Y = 430;
-                this.dots.Add(dot);
-                this.background.Children.Add(dot.Sprite);
-            } else if (this.direction == Direction.East)
-            {
-                random = this.random.Next(MinSpeed, MaxSpeed);
-                var dot = new EnemyDot(random, 0, this.direction);
-                random = this.random.Next(0, 370);
-                dot.X = 430;
-                dot.Y = random;
-                this.dots.Add(dot);
-                this.background.Children.Add(dot.Sprite);
-
+                case Direction.North:
+                    this.makeNorthDot();
+                    break;
+                case Direction.West:
+                    this.makeWestDot();
+                    break;
+                case Direction.South:
+                    this.makeSouthDot();
+                    break;
+                case Direction.East:
+                    this.makeEastDot();
+                    break;
             }
-            
         }
-        
+
+        private void makeEastDot()
+        {
+            var random = this.random.Next(MinSpeed, MaxSpeed);
+            var dot = new EnemyDot(random, 0, this.direction);
+            random = this.random.Next(0, 370);
+            dot.X = 430;
+            dot.Y = random;
+            this.dots.Add(dot);
+            this.background.Children.Add(dot.Sprite);
+        }
+
+        private void makeSouthDot()
+        {
+            var random = this.random.Next(MinSpeed, MaxSpeed);
+            var dot = new EnemyDot(0, random, this.direction);
+            random = this.random.Next(0, 370);
+            dot.X = random;
+            dot.Y = 430;
+            this.dots.Add(dot);
+            this.background.Children.Add(dot.Sprite);
+        }
+
+        private void makeWestDot()
+        {
+            var random = this.random.Next(MinSpeed, MaxSpeed);
+            var dot = new EnemyDot(random, 0, this.direction);
+            random = this.random.Next(0, 370);
+            dot.X = -30;
+            dot.Y = random;
+            this.dots.Add(dot);
+            this.background.Children.Add(dot.Sprite);
+        }
+
+        private void makeNorthDot()
+        {
+            var random = this.random.Next(MinSpeed, MaxSpeed);
+            var dot = new EnemyDot(0, random, this.direction);
+            random = this.random.Next(0, 370);
+            dot.X = random;
+            dot.Y = -30;
+            this.dots.Add(dot);
+            this.background.Children.Add(dot.Sprite);
+        }
 
         #endregion
     }

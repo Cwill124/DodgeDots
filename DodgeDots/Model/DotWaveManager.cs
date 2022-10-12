@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using DodgeDots.GameValues;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using DodgeDots.GameValues;
 
 namespace DodgeDots.Model
 {
@@ -14,13 +13,22 @@ namespace DodgeDots.Model
     {
         #region Data members
 
-        public IList<DotWave> waves { get; }
+        private const int NorthWave = 0;
+        private const int WestWave = 1;
+        private const int SouthWave = 2;
+        private const int EastWave = 3;
         private readonly DispatcherTimer timer;
         private int northTickCount;
         private int southTickCount;
         private int westTickCount;
         private int eastTickCount;
-        private Canvas background;
+        private readonly Canvas background;
+
+        #endregion
+
+        #region Properties
+
+        public IList<DotWave> waves { get; }
 
         #endregion
 
@@ -48,13 +56,15 @@ namespace DodgeDots.Model
         #region Methods
 
         private void addDotWaves()
-        {   this.waves.Add(new DotWave(Direction.North,this.background));
-            this.waves.Add(new DotWave(Direction.West,this.background));
-            this.waves.Add(new DotWave(Direction.South,this.background));
-            this.waves.Add(new DotWave(Direction.East,this.background));
+        {
+            this.waves.Add(new DotWave(Direction.North, this.background));
+            this.waves.Add(new DotWave(Direction.West, this.background));
+            this.waves.Add(new DotWave(Direction.South, this.background));
+            this.waves.Add(new DotWave(Direction.East, this.background));
 
             this.populateDotWave();
         }
+
         private void Timer_Tick(object sender, object e)
         {
             this.northTickCount++;
@@ -62,6 +72,7 @@ namespace DodgeDots.Model
             this.westTickCount++;
             this.eastTickCount++;
         }
+
         private void populateDotWave()
         {
             foreach (var currentDotWave in this.waves)
@@ -69,6 +80,7 @@ namespace DodgeDots.Model
                 currentDotWave.CreateDot();
             }
         }
+
         public void StartNorthWave()
         {
             if (this.northTickCount >= 60)
@@ -76,10 +88,8 @@ namespace DodgeDots.Model
                 this.waves[0].CreateDot();
                 this.northTickCount = 0;
             }
-            
-            
-            
         }
+
         public void StartSouthWave()
         {
             if (this.southTickCount >= 60)
@@ -97,6 +107,7 @@ namespace DodgeDots.Model
                 this.westTickCount = 0;
             }
         }
+
         public void StartEastWave()
         {
             if (this.eastTickCount >= 60)
@@ -105,6 +116,102 @@ namespace DodgeDots.Model
                 this.eastTickCount = 0;
             }
         }
+
+        public void manageDotWave(int index)
+        {
+            IList<EnemyDot> toRemove = new List<EnemyDot>();
+            foreach (var currentDot in this.waves[index].dots)
+            {
+                this.moveDotWave(index, currentDot);
+                if (this.checkToRemoveDot(index, currentDot))
+                {
+                    toRemove.Add(currentDot);
+                }
+            }
+
+            this.removeOffScreenDot(index, toRemove);
+        }
+
+        private void removeOffScreenDot(int index, IList<EnemyDot> toRemove)
+        {
+            foreach (var currentEnemyDot in toRemove)
+            {
+                this.waves[index].dots.Remove(currentEnemyDot);
+            }
+        }
+
+        private bool checkToRemoveDot(int index, EnemyDot currentDot)
+        {
+            var remove = false;
+            var towardsPositiveBorder = 430;
+            var towardsNegativeBorder = -30;
+            switch (index)
+            {
+                case NorthWave:
+                {
+                    if (currentDot.Y > towardsPositiveBorder)
+                    {
+                        this.background.Children.Remove(currentDot.Sprite);
+                        remove = true;
+                    }
+
+                    break;
+                }
+                case WestWave:
+                {
+                    if (currentDot.X > towardsPositiveBorder)
+                    {
+                        this.background.Children.Remove(currentDot.Sprite);
+                        remove = true;
+                    }
+
+                    break;
+                }
+                case SouthWave:
+                {
+                    if (currentDot.Y < towardsNegativeBorder)
+                    {
+                        this.background.Children.Remove(currentDot.Sprite);
+                        remove = true;
+                    }
+
+                    break;
+                }
+                case EastWave:
+                {
+                    if (currentDot.X < towardsNegativeBorder)
+                    {
+                        this.background.Children.Remove(currentDot.Sprite);
+                        remove = true;
+                    }
+
+                    break;
+                }
+            }
+
+            return remove;
+        }
+
+        private void moveDotWave(int index, EnemyDot currentDot)
+        {
+            if (index == NorthWave)
+            {
+                currentDot.MoveDown();
+            }
+            else if (index == WestWave)
+            {
+                currentDot.MoveRight();
+            }
+            else if (index == SouthWave)
+            {
+                currentDot.MoveUp();
+            }
+            else
+            {
+                currentDot.MoveLeft();
+            }
+        }
+
         #endregion
     }
 }

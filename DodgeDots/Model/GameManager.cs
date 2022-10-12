@@ -86,11 +86,17 @@ namespace DodgeDots.Model
 
         #region Methods
 
+
+        private void WinTimer_Tick(object sender, object e)
+        {
+            this.winTickCount++;
+        }
+
         /// <summary>
         ///     Checks for collision. does not work i Could not figure out to work correctly
         /// </summary>
         /// <param name="index">The index.</param>
-        private void checkForNorthWaveForCollision(int index)
+        private void checkForCollision(int index)
         {
             foreach (var dot in this.dotWaveManager.waves[index].dots)
             {
@@ -101,43 +107,40 @@ namespace DodgeDots.Model
                     this.winTimer.Stop();
                 }
 
-                {
-                }
+
             }
         }
-
-        private void WinTimer_Tick(object sender, object e)
-        {
-            this.winTickCount++;
-        }
-
         private void Timer_Tick(object sender, object e)
         {
             var speedOfGame = 2;
             this.tickCount++;
-
             if (this.tickCount % speedOfGame == 0)
             {
                 
                 this.dotWaveManager.StartNorthWave();
-                this.manageDotWave(NorthWave);
-                
+                this.dotWaveManager.manageDotWave(NorthWave);
+                this.checkForCollision(NorthWave);
+
+
                 if (this.winTickCount >= FiveSeconds)
                 {
                     this.dotWaveManager.StartWestWave();
-                    this.manageDotWave(WestWave);
+                    this.dotWaveManager.manageDotWave(WestWave);
+                    this.checkForCollision(WestWave);
                 }
 
                 if (this.winTickCount >= TenSeconds)
                 {
                     this.dotWaveManager.StartSouthWave();
-                    this.manageDotWave(SouthWave);
+                    this.dotWaveManager.manageDotWave(SouthWave);
+                    this.checkForCollision(SouthWave);
                 }
 
                 if (this.winTickCount >= FiftteenSeconds)
                 {
                     this.dotWaveManager.StartEastWave();
-                    this.manageDotWave(EastWave);
+                    this.dotWaveManager.manageDotWave(EastWave);
+                    this.checkForCollision(EastWave);
                 }
 
                 if (this.winTickCount >= TwentyfiveSeconds)
@@ -191,101 +194,7 @@ namespace DodgeDots.Model
             this.placePlayerCenteredInGameArena();
         }
 
-        private void manageDotWave(int index)
-        {
-            IList<EnemyDot> toRemove = new List<EnemyDot>();
-            foreach (var currentDot in this.dotWaveManager.waves[index].dots)
-            {
-                this.moveDotWave(index, currentDot);
-                this.checkForNorthWaveForCollision(index);
-                if (this.checkToRemoveDot(index, currentDot))
-                {
-                    toRemove.Add(currentDot);
-                }
-            }
-
-            this.removeOffScreenDot(index, toRemove);
-        }
-
-        private void removeOffScreenDot(int index, IList<EnemyDot> toRemove)
-        {
-            foreach (var currentEnemyDot in toRemove)
-            {
-                this.dotWaveManager.waves[index].dots.Remove(currentEnemyDot);
-            }
-        }
-
-        private bool checkToRemoveDot(int index, EnemyDot currentDot)
-        {
-            var remove = false;
-            var towardsPositiveBorder = 430;
-            var towardsNegativeBorder = -30;
-            switch (index)
-            {
-                case NorthWave:
-                {
-                    if (currentDot.Y > towardsPositiveBorder)
-                    {
-                        this.canvas.Children.Remove(currentDot.Sprite);
-                        remove = true;
-                    }
-
-                    break;
-                }
-                case WestWave:
-                {
-                    if (currentDot.X > towardsPositiveBorder)
-                    {
-                        this.canvas.Children.Remove(currentDot.Sprite);
-                        remove = true;
-                    }
-
-                    break;
-                }
-                case SouthWave:
-                {
-                    if (currentDot.Y < towardsNegativeBorder)
-                    {
-                        this.canvas.Children.Remove(currentDot.Sprite);
-                        remove = true;
-                    }
-
-                    break;
-                }
-                case EastWave:
-                {
-                    if (currentDot.X < towardsNegativeBorder)
-                    {
-                        this.canvas.Children.Remove(currentDot.Sprite);
-                        remove = true;
-                    }
-
-                    break;
-                }
-            }
-
-            return remove;
-        }
-
-        private void moveDotWave(int index, EnemyDot currentDot)
-        {
-            if (index == NorthWave)
-            {
-                currentDot.MoveDown();
-            }
-            else if (index == WestWave)
-            {
-                currentDot.MoveRight();
-            }
-            else if (index == SouthWave)
-            {
-                currentDot.MoveUp();
-            }
-            else
-            {
-                currentDot.MoveLeft();
-            }
-        }
+        
 
         private void placePlayerCenteredInGameArena()
         {
