@@ -55,6 +55,15 @@ namespace DodgeDots.Model
                 dot.Y = -30;
                 this.dots.Add(dot);
                 this.background.Children.Add(dot.Sprite);
+            }else if (this.direction == Direction.West)
+            {
+                random = this.random.Next(MinSpeed, MaxSpeed);
+                var dot = new EnemyDot(random, 0, this.direction);
+                random = this.random.Next(0, 370);
+                dot.X = -30;
+                dot.Y = random;
+                this.dots.Add(dot);
+                this.background.Children.Add(dot.Sprite);
             } else if (this.direction == Direction.South)
             {
                 random = this.random.Next(MinSpeed, MaxSpeed);
@@ -64,6 +73,16 @@ namespace DodgeDots.Model
                 dot.Y = 430;
                 this.dots.Add(dot);
                 this.background.Children.Add(dot.Sprite);
+            } else if (this.direction == Direction.East)
+            {
+                random = this.random.Next(MinSpeed, MaxSpeed);
+                var dot = new EnemyDot(random, 0, this.direction);
+                random = this.random.Next(0, 370);
+                dot.X = 430;
+                dot.Y = random;
+                this.dots.Add(dot);
+                this.background.Children.Add(dot.Sprite);
+
             }
             
         }

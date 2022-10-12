@@ -124,10 +124,11 @@ namespace DodgeDots.Model
                 
                 if (this.winTickCount >= FiveSeconds)
                 {
+                    this.dotWaveManager.StartWestWave();
                     this.manageDotWave(WestWave);
                 }
 
-                if (this.winTickCount >= 0)
+                if (this.winTickCount >= TenSeconds)
                 {
                     this.dotWaveManager.StartSouthWave();
                     this.manageDotWave(SouthWave);
@@ -135,6 +136,7 @@ namespace DodgeDots.Model
 
                 if (this.winTickCount >= FiftteenSeconds)
                 {
+                    this.dotWaveManager.StartEastWave();
                     this.manageDotWave(EastWave);
                 }
 
@@ -187,71 +189,6 @@ namespace DodgeDots.Model
             background.Children.Add(this.player.Sprite);
 
             this.placePlayerCenteredInGameArena();
-        }
-
-        private void createAndPlaceDots(Canvas background)
-        {
-            foreach (var wave in this.dotWaveManager.waves)
-            {
-                foreach (var dot in wave.dots)
-                {
-                    background.Children.Add(dot.Sprite);
-                }
-            }
-        }
-        private void createAndPlaceNorthDots(Canvas background)
-        {
-            var x = 0;
-            this.dotWaveManager.waves[NorthWave].CreateDot();
-            foreach (var currentDot in this.dotWaveManager.waves[NorthWave].dots)
-            {
-                var yVariation = this.random.Next(-40, 20);
-                currentDot.X += x;
-                currentDot.Y = -60 + yVariation;
-                background.Children.Add(currentDot.Sprite);
-                x += 40;
-            }
-        }
-
-        private void createAndPlaceWestDots(Canvas background)
-        {
-            var y = 0;
-            this.dotWaveManager.waves[WestWave].CreateDot();
-            foreach (var currentDot in this.dotWaveManager.waves[WestWave].dots)
-            {
-                var xVariation = this.random.Next(-40, 20);
-                currentDot.X = -60 + xVariation;
-                currentDot.Y += y;
-                background.Children.Add(currentDot.Sprite);
-                y += 40;
-            }
-        }
-
-        private void createAndPlacesSouthDots(Canvas background)
-        {
-            var x = 0;
-            this.dotWaveManager.waves[SouthWave].CreateDot();
-            foreach (var currentDot in this.dotWaveManager.waves[SouthWave].dots)
-            {
-                var yVariation = this.random.Next(-20, 40);
-                currentDot.X += x;
-                currentDot.Y = 460 + yVariation;
-                background.Children.Add(currentDot.Sprite);
-                x += 40;
-            }
-        }
-
-        private void createAndPlaceEastDots(Canvas background)
-        {
-            var y = 0;
-            foreach (var currentDot in this.dotWaveManager.waves[EastWave].dots)
-            {
-                var xVariation = this.random.Next(-20, 40);
-                currentDot.X = 460 + xVariation;
-                currentDot.Y += y;
-                background.Children.Add(currentDot.Sprite);
-                y += 40;
-            }
         }
 
         private void manageDotWave(int index)

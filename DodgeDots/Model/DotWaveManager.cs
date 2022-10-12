@@ -18,6 +18,8 @@ namespace DodgeDots.Model
         private readonly DispatcherTimer timer;
         private int northTickCount;
         private int southTickCount;
+        private int westTickCount;
+        private int eastTickCount;
         private Canvas background;
 
         #endregion
@@ -34,10 +36,11 @@ namespace DodgeDots.Model
             this.timer.Start();
             this.northTickCount = 0;
             this.southTickCount = 0;
+            this.westTickCount = 0;
+            this.eastTickCount = 0;
 
             this.background = background;
-            Debug.WriteLine(this.background.ToString());
-             this.addDotWaves();
+            this.addDotWaves();
         }
 
         #endregion
@@ -56,6 +59,8 @@ namespace DodgeDots.Model
         {
             this.northTickCount++;
             this.southTickCount++;
+            this.westTickCount++;
+            this.eastTickCount++;
         }
         private void populateDotWave()
         {
@@ -66,7 +71,7 @@ namespace DodgeDots.Model
         }
         public void StartNorthWave()
         {
-            if (this.northTickCount >= 40)
+            if (this.northTickCount >= 60)
             {
                 this.waves[0].CreateDot();
                 this.northTickCount = 0;
@@ -77,14 +82,28 @@ namespace DodgeDots.Model
         }
         public void StartSouthWave()
         {
-            if (this.southTickCount >= 40)
+            if (this.southTickCount >= 60)
             {
                 this.waves[2].CreateDot();
                 this.southTickCount = 0;
             }
+        }
 
-
-
+        public void StartWestWave()
+        {
+            if (this.westTickCount >= 60)
+            {
+                this.waves[1].CreateDot();
+                this.westTickCount = 0;
+            }
+        }
+        public void StartEastWave()
+        {
+            if (this.eastTickCount >= 60)
+            {
+                this.waves[3].CreateDot();
+                this.eastTickCount = 0;
+            }
         }
         #endregion
     }
