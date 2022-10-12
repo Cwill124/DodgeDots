@@ -16,7 +16,8 @@ namespace DodgeDots.Model
 
         public IList<DotWave> waves { get; }
         private readonly DispatcherTimer timer;
-        private int tickCount;
+        private int northTickCount;
+        private int southTickCount;
         private Canvas background;
 
         #endregion
@@ -31,8 +32,9 @@ namespace DodgeDots.Model
             this.timer.Tick += this.Timer_Tick;
             this.timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             this.timer.Start();
-            this.tickCount = 0;
-           
+            this.northTickCount = 0;
+            this.southTickCount = 0;
+
             this.background = background;
             Debug.WriteLine(this.background.ToString());
              this.addDotWaves();
@@ -52,7 +54,8 @@ namespace DodgeDots.Model
         }
         private void Timer_Tick(object sender, object e)
         {
-            this.tickCount++;
+            this.northTickCount++;
+            this.southTickCount++;
         }
         private void populateDotWave()
         {
@@ -63,16 +66,26 @@ namespace DodgeDots.Model
         }
         public void StartNorthWave()
         {
-            if (this.tickCount >= 20)
+            if (this.northTickCount >= 40)
             {
                 this.waves[0].CreateDot();
-                this.tickCount = 0;
+                this.northTickCount = 0;
             }
             
             
             
         }
+        public void StartSouthWave()
+        {
+            if (this.southTickCount >= 40)
+            {
+                this.waves[2].CreateDot();
+                this.southTickCount = 0;
+            }
 
+
+
+        }
         #endregion
     }
 }

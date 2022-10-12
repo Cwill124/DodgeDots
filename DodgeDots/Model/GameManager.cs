@@ -127,8 +127,9 @@ namespace DodgeDots.Model
                     this.manageDotWave(WestWave);
                 }
 
-                if (this.winTickCount >= TenSeconds)
+                if (this.winTickCount >= 0)
                 {
+                    this.dotWaveManager.StartSouthWave();
                     this.manageDotWave(SouthWave);
                 }
 

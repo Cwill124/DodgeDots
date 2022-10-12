@@ -15,7 +15,7 @@ namespace DodgeDots.Model
         #region Data members
 
         private const int MinSpeed = 1;
-        private const int MaxSpeed = 4;
+        private const int MaxSpeed = 3;
         public Direction direction { get; }
         private readonly Random random;
         public  IList<EnemyDot> dots { get; }
@@ -53,6 +53,15 @@ namespace DodgeDots.Model
                 random = this.random.Next(0, 370);
                 dot.X = random;
                 dot.Y = -30;
+                this.dots.Add(dot);
+                this.background.Children.Add(dot.Sprite);
+            } else if (this.direction == Direction.South)
+            {
+                random = this.random.Next(MinSpeed, MaxSpeed);
+                var dot = new EnemyDot(0, random, this.direction);
+                random = this.random.Next(0, 370);
+                dot.X = random;
+                dot.Y = 430;
                 this.dots.Add(dot);
                 this.background.Children.Add(dot.Sprite);
             }
