@@ -28,6 +28,7 @@ namespace DodgeDots.Model
             SetSpeed(SpeedXDirection, SpeedYDirection);
             this.backgroundWidth = backgroundWidth;
             this.backgroundHeight = backgroundHeight;
+            
         }
         /// <summary>
         ///     Moves the Player to the left.
@@ -81,6 +82,12 @@ namespace DodgeDots.Model
             {
                 this.MoveDown();
             }
+        }
+
+        public void SwapColor()
+        {
+            var sprite = (PlayerSprite)this.Sprite;
+            sprite.SwapColors();
         }
         #endregion
     }

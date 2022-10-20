@@ -19,23 +19,23 @@ namespace DodgeDots.View.Sprites
         public EnemyBallSprite(int colorNumber)
         {
             this.InitializeComponent();
-            this.ChangeColor(colorNumber);
+            this.changeColor(colorNumber);
         }
 
-        private void ChangeColor(int number)
+        private void changeColor(int number)
         {
             if (number == 1)
             {
-                SolidColorBrush myBrush = new SolidColorBrush(Colors.Red);
+                var myBrush = new SolidColorBrush(Colors.Red);
                 this.dot.Fill = myBrush;
             }
             else if(number == 2) {
-                SolidColorBrush myBrush = new SolidColorBrush(Colors.White);
+                var myBrush = new SolidColorBrush(Colors.White);
                 this.dot.Fill = myBrush;
             }
             else
             {
-                SolidColorBrush myBrush = new SolidColorBrush(Colors.Yellow);
+                var myBrush = new SolidColorBrush(Colors.Yellow);
                 this.dot.Fill = myBrush;
             }
             

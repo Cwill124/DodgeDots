@@ -1,4 +1,5 @@
-﻿using Windows.Foundation;
+﻿using System.Diagnostics;
+using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
@@ -58,6 +59,10 @@ namespace DodgeDots.View
                     break;
                 case VirtualKey.Down:
                     this.gameManager.Player.MovePlayerDown();
+                    break;
+                case VirtualKey.Space:
+                    this.gameManager.Player.SwapColor();
+                    Debug.WriteLine("Space");
                     break;
             }
         }

@@ -60,6 +60,11 @@ namespace DodgeDots.View.Sprites
             return false;
         }
 
+        //public void Test(PlayerSprite sprite)
+        //{
+        //    sprite.SwapColors();
+        //}
+
         #endregion
     }
 }
