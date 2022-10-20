@@ -23,14 +23,16 @@ namespace DodgeDots.Model
         {
             if (direction == Direction.North || direction == Direction.South)
             {
-                Sprite = new NorthSouthBallSprite();
+
+                Sprite = new EnemyBallSprite(1);
                 
+
 
             }
             else
             {
-                Sprite = new WestEastBallSprite();
-                
+                Sprite = new EnemyBallSprite(2);
+
             }
 
             SetSpeed(xSpeed, ySpeed);

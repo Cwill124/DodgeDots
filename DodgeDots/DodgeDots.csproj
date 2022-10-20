@@ -135,8 +135,8 @@
       <DependentUpon>BaseSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\ISpriteRender.cs" />
-    <Compile Include="View\Sprites\NorthSouthBallSprite.xaml.cs">
-      <DependentUpon>NorthSouthBallSprite.xaml</DependentUpon>
+    <Compile Include="View\Sprites\EnemyBallSprite.xaml.cs">
+      <DependentUpon>EnemyBallSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\PlayerSprite.xaml.cs">
       <DependentUpon>PlayerSprite.xaml</DependentUpon>
@@ -174,7 +174,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\NorthSouthBallSprite.xaml">
+    <Page Include="View\Sprites\EnemyBallSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
