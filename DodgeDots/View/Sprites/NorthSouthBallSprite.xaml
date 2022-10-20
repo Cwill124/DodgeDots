@@ -8,9 +8,11 @@
     mc:Ignorable="d"
     d:DesignHeight="30"
     d:DesignWidth="30">
-
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="Color" Color="Orange"></SolidColorBrush>
+    </UserControl.Resources>
     <Canvas>
-        <Ellipse x:Name="dot" Width="30" Height="30" Fill="Orange" />
+        <Ellipse x:Name="dot" Width="30" Height="30" Fill="{StaticResource Color}" />
 
     </Canvas>
 </local:BaseSprite>

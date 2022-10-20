@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using Windows.UI.Xaml.Controls;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
@@ -45,15 +46,18 @@ namespace DodgeDots.View.Sprites
         /// </returns>
         public bool IsTouching(BaseSprite sprite, BaseSprite sprite2)
         {
-            var heightAndWidth = 30;
-
             var x1 = Canvas.GetLeft(sprite);
             var y1 = Canvas.GetTop(sprite);
-            var rectangle = new Rectangle((int)x1, (int)y1, heightAndWidth, heightAndWidth);
-            var x2 = Canvas.GetLeft(sprite2);
+            var x2 = Canvas.GetLeft(sprite2); 
             var y2 = Canvas.GetTop(sprite2);
-            var rectangle2 = new Rectangle((int)x2, (int)y2, heightAndWidth, heightAndWidth);
-            return rectangle2.IntersectsWith(rectangle);
+            var radSum = 30;
+            var distanceX = x1 - x2;
+            var distanceY = y1 - y2;
+            if (distanceX * distanceX + distanceY * distanceY <= radSum * radSum)
+            {
+                return true;
+            }
+            return false;
         }
 
         #endregion

@@ -19,7 +19,7 @@ namespace DodgeDots.Model
         public Direction direction { get; }
         private readonly Random random;
         public  IList<EnemyDot> dots { get; }
-        private Canvas background;
+        private readonly Canvas background;
 
 
         #endregion
@@ -28,6 +28,7 @@ namespace DodgeDots.Model
 
         /// <summary>Initializes a new instance of the <see cref="DotWave" /> class.</summary>
         /// <param name="direction">The direction facing.</param>
+        /// <param name="background"></param>
         public DotWave(Direction direction, Canvas background)
         {
             this.direction = direction;
@@ -37,12 +38,13 @@ namespace DodgeDots.Model
 
         }
 
-        
+
 
         #endregion
 
         #region Methods
 
+        /// <summary>Creates a dot for the collection that calls it .</summary>
         public void CreateDot()
         {
             switch (this.direction)
@@ -109,4 +111,4 @@ namespace DodgeDots.Model
         #endregion
     }
    
-}
+} 

@@ -1,5 +1,9 @@
-﻿using DodgeDots.GameValues;
+﻿using System.Drawing;
+using Windows.UI;
+using Windows.UI.Xaml.Media;
+using DodgeDots.GameValues;
 using DodgeDots.View.Sprites;
+using Color = Windows.UI.Color;
 
 namespace DodgeDots.Model
 {
@@ -20,10 +24,13 @@ namespace DodgeDots.Model
             if (direction == Direction.North || direction == Direction.South)
             {
                 Sprite = new NorthSouthBallSprite();
+                
+
             }
             else
             {
                 Sprite = new WestEastBallSprite();
+                
             }
 
             SetSpeed(xSpeed, ySpeed);
