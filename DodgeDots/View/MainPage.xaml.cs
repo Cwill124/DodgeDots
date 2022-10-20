@@ -38,7 +38,7 @@ namespace DodgeDots.View
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(ApplicationWidth, ApplicationHeight));
 
             Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
-
+            ApplicationView.GetForCurrentView().Title = "Dodge Dots by Williams Iteration 2";
             this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
             this.gameManager.InitializeGame(this.canvas);
         }
@@ -48,16 +48,16 @@ namespace DodgeDots.View
             switch (args.VirtualKey)
             {
                 case VirtualKey.Left:
-                    this.gameManager.MovePlayerLeft();
+                    this.gameManager.Player.MovePlayerLeft();
                     break;
                 case VirtualKey.Right:
-                    this.gameManager.MovePlayerRight();
+                    this.gameManager.Player.MovePlayerRight();
                     break;
                 case VirtualKey.Up:
-                    this.gameManager.MovePlayerUp();
+                    this.gameManager.Player.MovePlayerUp();
                     break;
                 case VirtualKey.Down:
-                    this.gameManager.MovePlayerDown();
+                    this.gameManager.Player.MovePlayerDown();
                     break;
             }
         }

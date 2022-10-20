@@ -8,7 +8,7 @@ using Color = Windows.UI.Color;
 namespace DodgeDots.Model
 {
     /// <summary>
-    ///     creates a EnemyDot that the player needs to dodge
+    ///     creates a EnemyDot that the Player needs to dodge
     /// </summary>
     public class EnemyDot : GameObject
     {

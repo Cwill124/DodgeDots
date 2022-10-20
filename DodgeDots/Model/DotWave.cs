@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 namespace DodgeDots.Model
 {
     /// <summary>
-    ///     A wave of dots for the player to dodge
+    ///     A wave of dots for the Player to dodge
     /// </summary>
     public class DotWave
     {

@@ -22,7 +22,9 @@ namespace DodgeDots.Model
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
 
-        private Player player;
+        /// <summary>Gets the player.</summary>
+        /// <value>The player.</value>
+        public Player Player { get; set; }
 
         private readonly DispatcherTimer timer;
 
@@ -99,7 +101,7 @@ namespace DodgeDots.Model
         {
             foreach (var dot in this.dotWaveManager.waves[index].dots)
             {
-                if (this.player.Sprite.IsTouching(this.player.Sprite, dot.Sprite))
+                if (this.Player.Sprite.IsTouching(this.Player.Sprite, dot.Sprite))
                 {
                     this.displayGameOverMessage();
                     this.timer.Stop();
@@ -171,7 +173,7 @@ namespace DodgeDots.Model
         }
 
         /// <summary>
-        ///     Initializes the game placing player in the game
+        ///     Initializes the game placing Player in the game
         ///     Precondition: background != null
         ///     Postcondition: Game is initialized and ready for play.
         /// </summary>
@@ -187,8 +189,8 @@ namespace DodgeDots.Model
 
         private void createAndPlacePlayer(Canvas background)
         {
-            this.player = new Player();
-            background.Children.Add(this.player.Sprite);
+            this.Player = new Player(this.backgroundWidth,this.backgroundHeight);
+            background.Children.Add(this.Player.Sprite);
 
             this.placePlayerCenteredInGameArena();
         }
@@ -197,63 +199,11 @@ namespace DodgeDots.Model
 
         private void placePlayerCenteredInGameArena()
         {
-            this.player.X = this.backgroundWidth / 2 - this.player.Width / 2.0;
-            this.player.Y = this.backgroundHeight / 2 - this.player.Height / 2.0;
+            this.Player.X = this.backgroundWidth / 2 - this.Player.Width / 2.0;
+            this.Player.Y = this.backgroundHeight / 2 - this.Player.Height / 2.0;
         }
 
-        /// <summary>
-        ///     Moves the player to the left.
-        ///     Precondition: none
-        ///     Postcondition: The player has moved left.
-        /// </summary>
-        public void MovePlayerLeft()
-        {
-            var leftBorder = 0;
-            if (this.player.X > leftBorder)
-            {
-                this.player.MoveLeft();
-            }
-        }
-
-        /// <summary>
-        ///     Moves the player to the right.
-        ///     Precondition: none
-        ///     Postcondition: The player has moved right.
-        /// </summary>
-        public void MovePlayerRight()
-        {
-            if (this.player.X < this.backgroundWidth - this.player.Width)
-            {
-                this.player.MoveRight();
-            }
-        }
-
-        /// <summary>
-        ///     Moves the player up
-        ///     Precondition: none
-        ///     Postcondition: The player has moved up.
-        /// </summary>
-        public void MovePlayerUp()
-        {
-            var topBorder = 0;
-            if (this.player.Y > topBorder)
-            {
-                this.player.MoveUp();
-            }
-        }
-
-        /// <summary>
-        ///     Moves the player down
-        ///     Precondition: none
-        ///     Postcondition: The player has moved down.
-        /// </summary>
-        public void MovePlayerDown()
-        {
-            if (this.player.Y < this.backgroundHeight - this.player.Height)
-            {
-                this.player.MoveDown();
-            }
-        }
+        
 
         #endregion
     }
