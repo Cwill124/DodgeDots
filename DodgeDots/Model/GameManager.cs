@@ -18,6 +18,7 @@ namespace DodgeDots.Model
         private const int FiveSeconds = 5;
         private const int TenSeconds = 10;
         private const int FiftteenSeconds = 15;
+        private const int TwentySeconds = 20;
         private const int TwentyfiveSeconds = 25;
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
@@ -144,6 +145,13 @@ namespace DodgeDots.Model
                     this.checkForCollision(EastWave);
                 }
 
+                if (this.winTickCount >= TwentySeconds)
+                {
+                    this.dotWaveManager.StartNorthBlitzWave();
+                    this.dotWaveManager.StartSouthBlitzWave();
+                    this.dotWaveManager.manageDotWave(4);
+                    this.dotWaveManager.manageDotWave(5);
+                }
                 if (this.winTickCount >= TwentyfiveSeconds)
                 {
                     this.timer.Stop();

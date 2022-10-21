@@ -15,6 +15,12 @@
         East,
 
         /// <summary>The west</summary>
-        West
+        West,
+
+        /// <summary>The blitz</summary>
+        BlitzNorth,
+
+        /// <summary>The blitz south</summary>
+        BlitzSouth,
     }
 }

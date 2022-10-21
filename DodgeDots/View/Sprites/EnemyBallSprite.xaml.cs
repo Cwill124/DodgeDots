@@ -15,36 +15,41 @@ namespace DodgeDots.View.Sprites
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="NorthSouthBallSprite" /> class.
+        ///     Initializes a new instance of the <see cref="EnemyBallSprite" /> class.
         /// </summary>
-        public EnemyBallSprite(int colorNumber)
+        public EnemyBallSprite()
         {
             this.InitializeComponent();
-            this.changeColor(colorNumber);
+            
 
         }
 
-        private void changeColor(int number)
+        public void changeColor(int number)
         {
-            if (number == 1)
+            switch (number)
             {
-                var myBrush = new SolidColorBrush(Colors.Red);
-                this.color = myBrush;
-                this.dot.Fill = myBrush;
+                case 1:
+                {
+                    var myBrush = new SolidColorBrush(Colors.Red);
+                    this.color = myBrush;
+                    this.dot.Fill = myBrush;
+                    break;
+                }
+                case 2:
+                {
+                    var myBrush = new SolidColorBrush(Colors.White);
+                    this.color = myBrush;
+                    this.dot.Fill = myBrush;
+                    break;
+                }
+                case 3:
+                {
+                    var myBrush = new SolidColorBrush(Colors.Yellow);
+                    this.color = myBrush;
+                    this.dot.Fill = myBrush;
+                    break;
+                }
             }
-            else if(number == 2) {
-                var myBrush = new SolidColorBrush(Colors.White);
-                this.color = myBrush;
-                this.dot.Fill = myBrush;
-            }
-            else
-            {
-                var myBrush = new SolidColorBrush(Colors.Yellow);
-                this.color = myBrush;
-                this.dot.Fill = myBrush;
-            }
-            
-           
         }
         
 

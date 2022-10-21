@@ -15,7 +15,7 @@ namespace DodgeDots.Model
         #region Data members
 
         private const int MinSpeed = 1;
-        private const int MaxSpeed = 3;
+        private const int MaxSpeed = 4;
         public Direction direction { get; }
         private readonly Random random;
         public  IList<EnemyDot> dots { get; }
@@ -47,22 +47,32 @@ namespace DodgeDots.Model
         /// <summary>Creates a dot for the collection that calls it .</summary>
         public void CreateDot()
         {
-            switch (this.direction)
+            if (this.direction == Direction.North)
             {
-                case Direction.North:
-                    this.makeNorthDot();
-                    break;
-                case Direction.West:
-                    this.makeWestDot();
-                    break;
-                case Direction.South:
-                    this.makeSouthDot();
-                    break;
-                case Direction.East:
-                    this.makeEastDot();
-                    break;
+                this.makeNorthDot();
+            }
+            else if (this.direction == Direction.West)
+            {
+                this.makeWestDot();
+            }
+            else if (this.direction == Direction.South)
+            {
+                this.makeSouthDot();
+            }
+            else if (this.direction == Direction.East)
+            {
+                this.makeEastDot();
+            } else if (this.direction == Direction.BlitzNorth)
+            {
+                this.makeNorthDot();
+                
+            } else if (this.direction == Direction.BlitzSouth)
+            {
+                this.makeSouthDot();
             }
         }
+
+       
 
         private void makeEastDot()
         {
@@ -107,6 +117,7 @@ namespace DodgeDots.Model
             this.dots.Add(dot);
             this.background.Children.Add(dot.Sprite);
         }
+        
 
         #endregion
     }

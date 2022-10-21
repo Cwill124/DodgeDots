@@ -23,6 +23,9 @@ namespace DodgeDots.Model
         private int westTickCount;
         private int eastTickCount;
         private readonly Canvas background;
+        private int northblitzTickCount;
+        private int southblitzblitzTickCount;
+        
 
         #endregion
 
@@ -46,6 +49,8 @@ namespace DodgeDots.Model
             this.southTickCount = 0;
             this.westTickCount = 0;
             this.eastTickCount = 0;
+            this.northblitzTickCount = 0;
+            this.southblitzblitzTickCount = 0;
 
             this.background = background;
             this.addDotWaves();
@@ -61,6 +66,9 @@ namespace DodgeDots.Model
             this.waves.Add(new DotWave(Direction.West, this.background));
             this.waves.Add(new DotWave(Direction.South, this.background));
             this.waves.Add(new DotWave(Direction.East, this.background));
+            this.waves.Add(new DotWave(Direction.BlitzSouth, this.background));
+            this.waves.Add(new DotWave(Direction.BlitzNorth, this.background));
+
 
             this.populateDotWave();
         }
@@ -71,6 +79,8 @@ namespace DodgeDots.Model
             this.southTickCount++;
             this.westTickCount++;
             this.eastTickCount++;
+            this.northblitzTickCount++;
+            this.southblitzblitzTickCount++;
         }
 
         private void populateDotWave()
@@ -83,7 +93,7 @@ namespace DodgeDots.Model
 
         public void StartNorthWave()
         {
-            if (this.northTickCount >= 60)
+            if (this.northTickCount >= 30)
             {
                 this.waves[0].CreateDot();
                 this.northTickCount = 0;
@@ -92,7 +102,7 @@ namespace DodgeDots.Model
 
         public void StartSouthWave()
         {
-            if (this.southTickCount >= 60)
+            if (this.southTickCount >= 30)
             {
                 this.waves[2].CreateDot();
                 this.southTickCount = 0;
@@ -101,7 +111,7 @@ namespace DodgeDots.Model
 
         public void StartWestWave()
         {
-            if (this.westTickCount >= 60)
+            if (this.westTickCount >= 30)
             {
                 this.waves[1].CreateDot();
                 this.westTickCount = 0;
@@ -110,10 +120,27 @@ namespace DodgeDots.Model
 
         public void StartEastWave()
         {
-            if (this.eastTickCount >= 60)
+            if (this.eastTickCount >= 30)
             {
                 this.waves[3].CreateDot();
                 this.eastTickCount = 0;
+            }
+        }
+
+        public void StartNorthBlitzWave()
+        {
+            if (this.northblitzTickCount >= 30)
+            {
+                this.waves[5].CreateDot();
+                this.northblitzTickCount = 0;
+            }
+        }
+        public void StartSouthBlitzWave()
+        {
+            if (this.southblitzblitzTickCount >= 30)
+            {
+                this.waves[4].CreateDot();
+                this.southblitzblitzTickCount = 0;
             }
         }
 
@@ -194,7 +221,7 @@ namespace DodgeDots.Model
 
         private void moveDotWave(int index, EnemyDot currentDot)
         {
-            if (index == NorthWave)
+            if (index == NorthWave || index == 5)
             {
                 currentDot.MoveDown();
             }
@@ -202,7 +229,7 @@ namespace DodgeDots.Model
             {
                 currentDot.MoveRight();
             }
-            else if (index == SouthWave)
+            else if (index == SouthWave || index == 4)
             {
                 currentDot.MoveUp();
             }

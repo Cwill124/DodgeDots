@@ -24,15 +24,26 @@ namespace DodgeDots.Model
             if (direction == Direction.North || direction == Direction.South)
             {
 
-                Sprite = new EnemyBallSprite(1);
-                
+                Sprite = new EnemyBallSprite();
+                var sprite = (EnemyBallSprite)Sprite;
+                sprite.changeColor(1);
 
+
+
+            }
+            else if(direction == Direction.East || direction == Direction.West)
+            {
+                Sprite = new EnemyBallSprite();
+                var sprite = (EnemyBallSprite)Sprite;
+                sprite.changeColor(2);
 
             }
             else
             {
-                Sprite = new EnemyBallSprite(2);
-
+                Sprite = new EnemyBallSprite();
+                var sprite = (EnemyBallSprite)Sprite;
+                sprite.changeColor(3);
+                SetSpeed(xSpeed, ySpeed);
             }
 
             SetSpeed(xSpeed, ySpeed);
