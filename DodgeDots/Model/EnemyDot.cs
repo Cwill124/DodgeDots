@@ -10,6 +10,10 @@ namespace DodgeDots.Model
     /// </summary>
     public class EnemyDot : GameObject
     {
+        private const int purple = 1;
+        private const int white = 2;
+        private const int yellow = 3;
+
         #region Constructors
 
         /// <summary>Initializes a new instance of the <see cref="EnemyDot" /> class.</summary>
@@ -22,19 +26,19 @@ namespace DodgeDots.Model
             {
                 Sprite = new EnemyBallSprite();
                 var sprite = (EnemyBallSprite)Sprite;
-                sprite.ChangeColor(1);
+                sprite.ChangeColor(purple);
             }
             else if (direction == Direction.East || direction == Direction.West)
             {
                 Sprite = new EnemyBallSprite();
                 var sprite = (EnemyBallSprite)Sprite;
-                sprite.ChangeColor(2);
+                sprite.ChangeColor(white);
             }
             else
             {
                 Sprite = new EnemyBallSprite();
                 var sprite = (EnemyBallSprite)Sprite;
-                sprite.ChangeColor(3);
+                sprite.ChangeColor(yellow);
                 SetSpeed(xSpeed, ySpeed);
             }
 

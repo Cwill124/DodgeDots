@@ -15,6 +15,8 @@ namespace DodgeDots.Model
         private const int WestWave = 1;
         private const int SouthWave = 2;
         private const int EastWave = 3;
+        private const int NorthBlitzWave = 5;
+        private const int SouthBlitzWave = 4;
         private const int FiveSeconds = 5;
         private const int TenSeconds = 10;
         private const int FiftteenSeconds = 15;
@@ -172,8 +174,8 @@ namespace DodgeDots.Model
                 {
                     this.dotWaveManager.StartNorthBlitzWave();
                     this.dotWaveManager.StartSouthBlitzWave();
-                    this.dotWaveManager.ManageDotWave(4);
-                    this.dotWaveManager.ManageDotWave(5);
+                    this.dotWaveManager.ManageDotWave(SouthBlitzWave);
+                    this.dotWaveManager.ManageDotWave(NorthBlitzWave);
                 }
 
                 if (this.winTickCount >= TwentyfiveSeconds)
@@ -184,15 +186,6 @@ namespace DodgeDots.Model
                     this.endMessegeNumber = 0;
                     this.onEndGameMessegeUpdated();
                 }
-            }
-        }
-
-        private void displayGameOverMessage()
-        {
-            var endMessage = (TextBlock)this.canvas.FindName("loseMessage");
-            if (endMessage != null)
-            {
-                endMessage.Visibility = Visibility.Visible;
             }
         }
 
