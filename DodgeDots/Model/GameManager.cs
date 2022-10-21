@@ -36,7 +36,9 @@ namespace DodgeDots.Model
 
         private readonly DispatcherTimer winTimer;
 
-        private Canvas canvas;
+        /// <summary>Gets the canvas.</summary>
+        /// <value>The canvas.</value>
+        public Canvas Canvas { get; private set; }
 
         private DotWaveManager dotWaveManager;
 
@@ -89,7 +91,7 @@ namespace DodgeDots.Model
                 throw new ArgumentOutOfRangeException(nameof(backgroundWidth));
             }
 
-            this.canvas = null;
+            this.Canvas = null;
             
             this.backgroundHeight = backgroundHeight;
             this.backgroundWidth = backgroundWidth;
@@ -197,7 +199,7 @@ namespace DodgeDots.Model
         /// <param name="background">The background canvas.</param>
         public void InitializeGame(Canvas background)
         {
-            this.canvas = background ?? throw new ArgumentNullException(nameof(background));
+            this.Canvas = background ?? throw new ArgumentNullException(nameof(background));
             this.dotWaveManager = new DotWaveManager(background);
             this.createAndPlacePlayer(background);
         }

@@ -10,9 +10,9 @@ namespace DodgeDots.Model
     /// </summary>
     public class EnemyDot : GameObject
     {
-        private const int purple = 1;
-        private const int white = 2;
-        private const int yellow = 3;
+        private const int Purple = 1;
+        private const int White = 2;
+        private const int Yellow = 3;
 
         #region Constructors
 
@@ -26,19 +26,19 @@ namespace DodgeDots.Model
             {
                 Sprite = new EnemyBallSprite();
                 var sprite = (EnemyBallSprite)Sprite;
-                sprite.ChangeColor(purple);
+                sprite.ChangeColor(Purple);
             }
             else if (direction == Direction.East || direction == Direction.West)
             {
                 Sprite = new EnemyBallSprite();
                 var sprite = (EnemyBallSprite)Sprite;
-                sprite.ChangeColor(white);
+                sprite.ChangeColor(White);
             }
             else
             {
                 Sprite = new EnemyBallSprite();
                 var sprite = (EnemyBallSprite)Sprite;
-                sprite.ChangeColor(yellow);
+                sprite.ChangeColor(Yellow);
                 SetSpeed(xSpeed, ySpeed);
             }
 
