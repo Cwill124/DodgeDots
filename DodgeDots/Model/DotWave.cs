@@ -14,8 +14,8 @@ namespace DodgeDots.Model
     {
         #region Data members
 
-        private const int MinSpeed = 1;
-        private const int MaxSpeed = 4;
+        private const int MinSpeed = 2;
+        private const int MaxSpeed = 5;
         public Direction direction { get; }
         private readonly Random random;
         public  IList<EnemyDot> dots { get; }

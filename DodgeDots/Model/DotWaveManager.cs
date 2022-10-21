@@ -25,6 +25,7 @@ namespace DodgeDots.Model
         private readonly Canvas background;
         private int northblitzTickCount;
         private int southblitzblitzTickCount;
+        private readonly int spawnrate = 60;
         
 
         #endregion
@@ -93,7 +94,7 @@ namespace DodgeDots.Model
 
         public void StartNorthWave()
         {
-            if (this.northTickCount >= 30)
+            if (this.northTickCount >= this.spawnrate)
             {
                 this.waves[0].CreateDot();
                 this.northTickCount = 0;
@@ -102,7 +103,7 @@ namespace DodgeDots.Model
 
         public void StartSouthWave()
         {
-            if (this.southTickCount >= 30)
+            if (this.southTickCount >= this.spawnrate)
             {
                 this.waves[2].CreateDot();
                 this.southTickCount = 0;
@@ -111,7 +112,7 @@ namespace DodgeDots.Model
 
         public void StartWestWave()
         {
-            if (this.westTickCount >= 30)
+            if (this.westTickCount >= this.spawnrate)
             {
                 this.waves[1].CreateDot();
                 this.westTickCount = 0;
@@ -120,7 +121,7 @@ namespace DodgeDots.Model
 
         public void StartEastWave()
         {
-            if (this.eastTickCount >= 30)
+            if (this.eastTickCount >= this.spawnrate)
             {
                 this.waves[3].CreateDot();
                 this.eastTickCount = 0;
@@ -129,7 +130,7 @@ namespace DodgeDots.Model
 
         public void StartNorthBlitzWave()
         {
-            if (this.northblitzTickCount >= 30)
+            if (this.northblitzTickCount >= this.spawnrate)
             {
                 this.waves[5].CreateDot();
                 this.northblitzTickCount = 0;
@@ -137,7 +138,7 @@ namespace DodgeDots.Model
         }
         public void StartSouthBlitzWave()
         {
-            if (this.southblitzblitzTickCount >= 30)
+            if (this.southblitzblitzTickCount >= this.spawnrate)
             {
                 this.waves[4].CreateDot();
                 this.southblitzblitzTickCount = 0;

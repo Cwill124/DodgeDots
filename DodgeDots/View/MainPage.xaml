@@ -14,5 +14,6 @@
         <TextBlock x:Name="loseMessage" Canvas.ZIndex="999" Canvas.Left="150" TextWrapping="Wrap" Text="Game Over!"
                    Visibility="Collapsed" Canvas.Top="185" Foreground="Red" FontSize="16" FontStyle="Normal"
                    FontFamily="Lucida Sans" FontWeight="Bold" />
+        <TextBlock x:Name="timer" Canvas.Left="375" Canvas.ZIndex="999999" TextWrapping="Wrap" Text="25" Canvas.Top="10"/>
     </Canvas>
 </Page>

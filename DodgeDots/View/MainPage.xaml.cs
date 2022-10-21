@@ -42,6 +42,12 @@ namespace DodgeDots.View
             ApplicationView.GetForCurrentView().Title = "Dodge Dots by Williams Iteration 2";
             this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
             this.gameManager.InitializeGame(this.canvas);
+            this.gameManager.CountDownTimerCountUpdated += GameManager_CountDownTimerCountUpdated;
+        }
+
+        private void GameManager_CountDownTimerCountUpdated(int count)
+        {
+            this.timer.Text = count.ToString();
         }
 
         private void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)

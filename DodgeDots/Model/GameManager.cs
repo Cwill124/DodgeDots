@@ -22,6 +22,7 @@ namespace DodgeDots.Model
         private const int TwentyfiveSeconds = 25;
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
+        private int amountOfTime = 24;
 
         /// <summary>Gets the player.</summary>
         /// <value>The player.</value>
@@ -40,6 +41,15 @@ namespace DodgeDots.Model
         private int tickCount;
 
         private int winTickCount;
+
+        public delegate void CountDownTimerHandler(int count);
+
+        public event CountDownTimerHandler CountDownTimerCountUpdated;
+
+        private void onCountDownTimerCountUpdated()
+        {
+            this.CountDownTimerCountUpdated?.Invoke(this.amountOfTime);
+        }
 
         #endregion
 
@@ -90,8 +100,11 @@ namespace DodgeDots.Model
 
 
         private void WinTimer_Tick(object sender, object e)
-        {
+        {  
+            this.onCountDownTimerCountUpdated();
             this.winTickCount++;
+            this.amountOfTime--;
+           
         }
 
         /// <summary>
