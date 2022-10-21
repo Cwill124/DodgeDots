@@ -11,6 +11,7 @@ namespace DodgeDots.View.Sprites
     /// </summary>
     public sealed partial class EnemyBallSprite
     {
+        public SolidColorBrush color { get; set; }
         #region Constructors
 
         /// <summary>
@@ -20,6 +21,7 @@ namespace DodgeDots.View.Sprites
         {
             this.InitializeComponent();
             this.changeColor(colorNumber);
+
         }
 
         private void changeColor(int number)
@@ -27,15 +29,18 @@ namespace DodgeDots.View.Sprites
             if (number == 1)
             {
                 var myBrush = new SolidColorBrush(Colors.Red);
+                this.color = myBrush;
                 this.dot.Fill = myBrush;
             }
             else if(number == 2) {
                 var myBrush = new SolidColorBrush(Colors.White);
+                this.color = myBrush;
                 this.dot.Fill = myBrush;
             }
             else
             {
                 var myBrush = new SolidColorBrush(Colors.Yellow);
+                this.color = myBrush;
                 this.dot.Fill = myBrush;
             }
             

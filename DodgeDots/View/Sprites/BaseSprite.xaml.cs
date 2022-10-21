@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using Windows.UI.Xaml.Controls;
 
@@ -38,11 +39,11 @@ namespace DodgeDots.View.Sprites
             Canvas.SetTop(this, y);
         }
 
-        /// <summary>Determines whether the specified sprite is touching.</summary>
+        /// <summary>Determines whether the specified sprite is touching and is the same Color.</summary>
         /// <param name="sprite">The sprite.</param>
         /// <param name="sprite2">The sprite2.</param>
         /// <returns>
-        ///     <c>true</c> if the specified sprite is touching; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified sprite is touching and are not the same color; otherwise, <c>false</c>.
         /// </returns>
         public bool IsTouching(BaseSprite sprite, BaseSprite sprite2)
         {
@@ -53,10 +54,18 @@ namespace DodgeDots.View.Sprites
             var radSum = 30;
             var distanceX = x1 - x2;
             var distanceY = y1 - y2;
-            if (distanceX * distanceX + distanceY * distanceY <= radSum * radSum)
+            var playerSprite = (PlayerSprite)sprite;
+            var playerColor = playerSprite.color;
+            var enemySprite = (EnemyBallSprite)sprite2;
+            var enemyColor = enemySprite.color;
+            if (playerColor.Color != enemyColor.Color)
             {
-                return true;
+                if (distanceX * distanceX + distanceY * distanceY <= radSum * radSum)
+                {
+                    return true;
+                }
             }
+            
             return false;
         }
 

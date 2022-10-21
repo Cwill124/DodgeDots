@@ -13,6 +13,8 @@ namespace DodgeDots.View.Sprites
     {
         public int swap { get; set; }
 
+        public SolidColorBrush color { get; set; }
+
         #region Constructors
 
         /// <summary>
@@ -24,6 +26,7 @@ namespace DodgeDots.View.Sprites
         {
             this.InitializeComponent();
             this.swap = 0;
+            this.color = new SolidColorBrush(Colors.Red);
 
         }
 
@@ -39,6 +42,7 @@ namespace DodgeDots.View.Sprites
                     var outerColor = new SolidColorBrush(Colors.White);
                     this.playerOuter.Fill = outerColor;
                     this.swap = 1;
+                    this.color = outerColor;
                     break;
                 }
                 case 1:
@@ -48,6 +52,7 @@ namespace DodgeDots.View.Sprites
                     var outerColor = new SolidColorBrush(Colors.Red);
                     this.playerOuter.Fill = outerColor;
                     this.swap = 0;
+                    this.color = outerColor;
                     break;
                 }
             }
