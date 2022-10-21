@@ -12,8 +12,9 @@
     Width="30">
 
     <Canvas>
-        <Ellipse x:Name="playerOuter" Width="30" Height="30" Fill="Red" />
-        <Ellipse x:Name="playerInner" Width="18" Height="18" Fill="White" Canvas.Left="6" Canvas.Top="6" RenderTransformOrigin="0.458,0.603" />
+        <Ellipse x:Name="playerOuter" Width="30" Height="30" Fill="MediumPurple" />
+        <Ellipse x:Name="playerInner" Width="18" Height="18" Fill="White" Canvas.Left="6" Canvas.Top="6"
+                 RenderTransformOrigin="0.458,0.603" />
 
 
     </Canvas>

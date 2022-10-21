@@ -12,8 +12,8 @@ namespace DodgeDots.Model
 
         private const int SpeedXDirection = 3;
         private const int SpeedYDirection = 3;
-        private double backgroundWidth = 0;
-        private double backgroundHeight = 0;
+        private readonly double backgroundWidth;
+        private readonly double backgroundHeight;
 
         #endregion
 
@@ -28,8 +28,8 @@ namespace DodgeDots.Model
             SetSpeed(SpeedXDirection, SpeedYDirection);
             this.backgroundWidth = backgroundWidth;
             this.backgroundHeight = backgroundHeight;
-            
         }
+
         /// <summary>
         ///     Moves the Player to the left.
         ///     Precondition: none
@@ -38,9 +38,9 @@ namespace DodgeDots.Model
         public void MovePlayerLeft()
         {
             var leftBorder = 0;
-            if (this.X > leftBorder)
+            if (X > leftBorder)
             {
-                this.MoveLeft();
+                MoveLeft();
             }
         }
 
@@ -51,9 +51,9 @@ namespace DodgeDots.Model
         /// </summary>
         public void MovePlayerRight()
         {
-            if (this.X < this.backgroundWidth - this.Width)
+            if (X < this.backgroundWidth - Width)
             {
-                this.MoveRight();
+                MoveRight();
             }
         }
 
@@ -65,9 +65,9 @@ namespace DodgeDots.Model
         public void MovePlayerUp()
         {
             var topBorder = 0;
-            if (this.Y > topBorder)
+            if (Y > topBorder)
             {
-                this.MoveUp();
+                MoveUp();
             }
         }
 
@@ -78,17 +78,19 @@ namespace DodgeDots.Model
         /// </summary>
         public void MovePlayerDown()
         {
-            if (this.Y < this.backgroundHeight - this.Height)
+            if (Y < this.backgroundHeight - Height)
             {
-                this.MoveDown();
+                MoveDown();
             }
         }
 
+        /// <summary>Swaps the color.</summary>
         public void SwapColor()
         {
-            var sprite = (PlayerSprite)this.Sprite;
+            var sprite = (PlayerSprite)Sprite;
             sprite.SwapColors();
         }
+
         #endregion
     }
 }

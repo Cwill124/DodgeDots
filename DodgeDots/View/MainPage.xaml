@@ -9,11 +9,12 @@
 
     <Canvas x:Name="canvas" Width="400" Height="400" Background="Black">
         <TextBlock x:Name="winMessage" Canvas.ZIndex="1000" Canvas.Left="167" TextWrapping="Wrap" Text="You Win!"
-                   Visibility="Collapsed" Canvas.Top="185" Foreground="Purple" FontSize="16" FontStyle="Normal"
+                   Visibility="Collapsed" Canvas.Top="185" Foreground="Red" FontSize="16" FontStyle="Normal"
                    FontFamily="Lucida Sans" FontWeight="Bold" />
         <TextBlock x:Name="loseMessage" Canvas.ZIndex="999" Canvas.Left="150" TextWrapping="Wrap" Text="Game Over!"
-                   Visibility="Collapsed" Canvas.Top="185" Foreground="Purple" FontSize="16" FontStyle="Normal"
+                   Visibility="Collapsed" Canvas.Top="185" Foreground="Red" FontSize="16" FontStyle="Normal"
                    FontFamily="Lucida Sans" FontWeight="Bold" />
-        <TextBlock x:Name="timer" Canvas.Left="375" Canvas.ZIndex="999999" TextWrapping="Wrap" Text="25" Canvas.Top="10"/>
+        <TextBlock x:Name="timer" Canvas.Left="375" Canvas.ZIndex="999999" TextWrapping="Wrap" Text="25"
+                   Canvas.Top="10" />
     </Canvas>
 </Page>

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+﻿
 using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Core;
@@ -81,11 +81,8 @@ namespace DodgeDots.View
                     break;
                 case VirtualKey.Space:
                     this.gameManager.Player.SwapColor();
-                    Debug.WriteLine("Space");
                     break;
             }
         }
-
-        
     }
 }

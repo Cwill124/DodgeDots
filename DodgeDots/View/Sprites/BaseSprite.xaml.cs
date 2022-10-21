@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing;
+﻿
 using Windows.UI.Xaml.Controls;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
@@ -43,21 +41,21 @@ namespace DodgeDots.View.Sprites
         /// <param name="sprite">The sprite.</param>
         /// <param name="sprite2">The sprite2.</param>
         /// <returns>
-        ///     <c>true</c> if the specified sprite is touching and are not the same color; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified sprite is touching and are not the same Color; otherwise, <c>false</c>.
         /// </returns>
         public bool IsTouching(BaseSprite sprite, BaseSprite sprite2)
         {
             var x1 = Canvas.GetLeft(sprite);
             var y1 = Canvas.GetTop(sprite);
-            var x2 = Canvas.GetLeft(sprite2); 
+            var x2 = Canvas.GetLeft(sprite2);
             var y2 = Canvas.GetTop(sprite2);
             var radSum = 30;
             var distanceX = x1 - x2;
             var distanceY = y1 - y2;
             var playerSprite = (PlayerSprite)sprite;
-            var playerColor = playerSprite.color;
+            var playerColor = playerSprite.Color;
             var enemySprite = (EnemyBallSprite)sprite2;
-            var enemyColor = enemySprite.color;
+            var enemyColor = enemySprite.Color;
             if (playerColor.Color != enemyColor.Color)
             {
                 if (distanceX * distanceX + distanceY * distanceY <= radSum * radSum)
@@ -65,7 +63,7 @@ namespace DodgeDots.View.Sprites
                     return true;
                 }
             }
-            
+
             return false;
         }
 

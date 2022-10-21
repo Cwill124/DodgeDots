@@ -23,7 +23,8 @@ namespace DodgeDots.Model
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
         private int amountOfTime = 24;
-        private int endMessegeNumber = 0;
+        private int endMessegeNumber;
+
 
         /// <summary>Gets the player.</summary>
         /// <value>The player.</value>
@@ -33,8 +34,6 @@ namespace DodgeDots.Model
 
         private readonly DispatcherTimer winTimer;
 
-        private readonly Random random;
-
         private Canvas canvas;
 
         private DotWaveManager dotWaveManager;
@@ -43,20 +42,28 @@ namespace DodgeDots.Model
 
         private int winTickCount;
 
+        /// <summary>
+        ///   <br />
+        /// </summary>
+        /// <param name="count">The count.</param>
         public delegate void CountDownTimerHandler(int count);
 
+        /// <summary>Occurs when [count down timer count updated].</summary>
         public event CountDownTimerHandler CountDownTimerCountUpdated;
 
+        /// <summary>
+        ///   <br />
+        /// </summary>
+        /// <param name="count">The count.</param>
         public delegate void EndGameMessegeHandler(int count);
+
+        /// <summary>Occurs when [end game messege updated].</summary>
         public event EndGameMessegeHandler EndGameMessegeUpdated;
 
         private void onEndGameMessegeUpdated()
         {
-
             this.EndGameMessegeUpdated?.Invoke(this.endMessegeNumber);
         }
-
-
 
         #endregion
 
@@ -81,7 +88,7 @@ namespace DodgeDots.Model
             }
 
             this.canvas = null;
-            this.random = new Random();
+            
             this.backgroundHeight = backgroundHeight;
             this.backgroundWidth = backgroundWidth;
             this.dotWaveManager = null;
@@ -105,13 +112,11 @@ namespace DodgeDots.Model
 
         #region Methods
 
-
         private void WinTimer_Tick(object sender, object e)
-        {  
+        {
             this.onCountDownTimerCountUpdated();
             this.winTickCount++;
             this.amountOfTime--;
-           
         }
 
         /// <summary>
@@ -120,7 +125,7 @@ namespace DodgeDots.Model
         /// <param name="index">The index.</param>
         private void checkForCollision(int index)
         {
-            foreach (var dot in this.dotWaveManager.waves[index].dots)
+            foreach (var dot in this.dotWaveManager.Waves[index].Dots)
             {
                 if (this.Player.Sprite.IsTouching(this.Player.Sprite, dot.Sprite))
                 {
@@ -129,40 +134,37 @@ namespace DodgeDots.Model
                     this.timer.Stop();
                     this.winTimer.Stop();
                 }
-
-
             }
         }
+
         private void Timer_Tick(object sender, object e)
         {
             var speedOfGame = 2;
             this.tickCount++;
             if (this.tickCount % speedOfGame == 0)
             {
-                
                 this.dotWaveManager.StartNorthWave();
-                this.dotWaveManager.manageDotWave(NorthWave);
+                this.dotWaveManager.ManageDotWave(NorthWave);
                 this.checkForCollision(NorthWave);
-
 
                 if (this.winTickCount >= FiveSeconds)
                 {
                     this.dotWaveManager.StartWestWave();
-                    this.dotWaveManager.manageDotWave(WestWave);
+                    this.dotWaveManager.ManageDotWave(WestWave);
                     this.checkForCollision(WestWave);
                 }
 
                 if (this.winTickCount >= TenSeconds)
                 {
                     this.dotWaveManager.StartSouthWave();
-                    this.dotWaveManager.manageDotWave(SouthWave);
+                    this.dotWaveManager.ManageDotWave(SouthWave);
                     this.checkForCollision(SouthWave);
                 }
 
                 if (this.winTickCount >= FiftteenSeconds)
                 {
                     this.dotWaveManager.StartEastWave();
-                    this.dotWaveManager.manageDotWave(EastWave);
+                    this.dotWaveManager.ManageDotWave(EastWave);
                     this.checkForCollision(EastWave);
                 }
 
@@ -170,9 +172,10 @@ namespace DodgeDots.Model
                 {
                     this.dotWaveManager.StartNorthBlitzWave();
                     this.dotWaveManager.StartSouthBlitzWave();
-                    this.dotWaveManager.manageDotWave(4);
-                    this.dotWaveManager.manageDotWave(5);
+                    this.dotWaveManager.ManageDotWave(4);
+                    this.dotWaveManager.ManageDotWave(5);
                 }
+
                 if (this.winTickCount >= TwentyfiveSeconds)
                 {
                     this.timer.Stop();
@@ -204,30 +207,26 @@ namespace DodgeDots.Model
             this.canvas = background ?? throw new ArgumentNullException(nameof(background));
             this.dotWaveManager = new DotWaveManager(background);
             this.createAndPlacePlayer(background);
-            
-            
         }
+
         private void onCountDownTimerCountUpdated()
         {
             this.CountDownTimerCountUpdated?.Invoke(this.amountOfTime);
         }
+
         private void createAndPlacePlayer(Canvas background)
         {
-            this.Player = new Player(this.backgroundWidth,this.backgroundHeight);
+            this.Player = new Player(this.backgroundWidth, this.backgroundHeight);
             background.Children.Add(this.Player.Sprite);
 
             this.placePlayerCenteredInGameArena();
         }
-
-        
 
         private void placePlayerCenteredInGameArena()
         {
             this.Player.X = this.backgroundWidth / 2 - this.Player.Width / 2.0;
             this.Player.Y = this.backgroundHeight / 2 - this.Player.Height / 2.0;
         }
-
-        
 
         #endregion
     }

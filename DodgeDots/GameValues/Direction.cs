@@ -1,7 +1,7 @@
 ﻿namespace DodgeDots.GameValues
 {
     /// <summary>
-    ///     For what direction that the dot wave will be facing
+    ///     For what Direction that the dot wave will be facing
     /// </summary>
     public enum Direction
     {

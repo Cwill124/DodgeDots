@@ -11,9 +11,13 @@ namespace DodgeDots.View.Sprites
     /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
     public sealed partial class PlayerSprite
     {
-        public int swap { get; set; }
+        /// <summary>Gets or sets the swap number.</summary>
+        /// <value>The swap.</value>
+        public int Swap { get; set; }
 
-        public SolidColorBrush color { get; set; }
+        /// <summary>Gets or sets the color.</summary>
+        /// <value>The color.</value>
+        public SolidColorBrush Color { get; set; }
 
         #region Constructors
 
@@ -25,34 +29,33 @@ namespace DodgeDots.View.Sprites
         public PlayerSprite()
         {
             this.InitializeComponent();
-            this.swap = 0;
-            this.color = new SolidColorBrush(Colors.Red);
-
+            this.Swap = 0;
+            this.Color = new SolidColorBrush(Colors.MediumPurple);
         }
 
-
+        /// <summary>Swaps the colors.</summary>
         public void SwapColors()
         {
-            switch (this.swap)
+            switch (this.Swap)
             {
                 case 0:
                 {
-                    var innerColor = new SolidColorBrush(Colors.Red);
+                    var innerColor = new SolidColorBrush(Colors.MediumPurple);
                     this.playerInner.Fill = innerColor;
                     var outerColor = new SolidColorBrush(Colors.White);
                     this.playerOuter.Fill = outerColor;
-                    this.swap = 1;
-                    this.color = outerColor;
+                    this.Swap = 1;
+                    this.Color = outerColor;
                     break;
                 }
                 case 1:
                 {
                     var innerColor = new SolidColorBrush(Colors.White);
                     this.playerInner.Fill = innerColor;
-                    var outerColor = new SolidColorBrush(Colors.Red);
+                    var outerColor = new SolidColorBrush(Colors.MediumPurple);
                     this.playerOuter.Fill = outerColor;
-                    this.swap = 0;
-                    this.color = outerColor;
+                    this.Swap = 0;
+                    this.Color = outerColor;
                     break;
                 }
             }
