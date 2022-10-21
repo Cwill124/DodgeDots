@@ -23,6 +23,7 @@ namespace DodgeDots.Model
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
         private int amountOfTime = 24;
+        private int endMessegeNumber = 0;
 
         /// <summary>Gets the player.</summary>
         /// <value>The player.</value>
@@ -46,10 +47,16 @@ namespace DodgeDots.Model
 
         public event CountDownTimerHandler CountDownTimerCountUpdated;
 
-        private void onCountDownTimerCountUpdated()
+        public delegate void EndGameMessegeHandler(int count);
+        public event EndGameMessegeHandler EndGameMessegeUpdated;
+
+        private void onEndGameMessegeUpdated()
         {
-            this.CountDownTimerCountUpdated?.Invoke(this.amountOfTime);
+
+            this.EndGameMessegeUpdated?.Invoke(this.endMessegeNumber);
         }
+
+
 
         #endregion
 
@@ -117,7 +124,8 @@ namespace DodgeDots.Model
             {
                 if (this.Player.Sprite.IsTouching(this.Player.Sprite, dot.Sprite))
                 {
-                    this.displayGameOverMessage();
+                    this.endMessegeNumber = 1;
+                    this.onEndGameMessegeUpdated();
                     this.timer.Stop();
                     this.winTimer.Stop();
                 }
@@ -170,17 +178,9 @@ namespace DodgeDots.Model
                     this.timer.Stop();
                     this.winTimer.Stop();
 
-                    this.displayWinEndMessage();
+                    this.endMessegeNumber = 0;
+                    this.onEndGameMessegeUpdated();
                 }
-            }
-        }
-
-        private void displayWinEndMessage()
-        {
-            var endMessage = (TextBlock)this.canvas.FindName("winMessage");
-            if (endMessage != null)
-            {
-                endMessage.Visibility = Visibility.Visible;
             }
         }
 
@@ -207,7 +207,10 @@ namespace DodgeDots.Model
             
             
         }
-
+        private void onCountDownTimerCountUpdated()
+        {
+            this.CountDownTimerCountUpdated?.Invoke(this.amountOfTime);
+        }
         private void createAndPlacePlayer(Canvas background)
         {
             this.Player = new Player(this.backgroundWidth,this.backgroundHeight);

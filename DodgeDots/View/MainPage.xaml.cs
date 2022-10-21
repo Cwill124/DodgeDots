@@ -42,7 +42,20 @@ namespace DodgeDots.View
             ApplicationView.GetForCurrentView().Title = "Dodge Dots by Williams Iteration 2";
             this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
             this.gameManager.InitializeGame(this.canvas);
-            this.gameManager.CountDownTimerCountUpdated += GameManager_CountDownTimerCountUpdated;
+            this.gameManager.CountDownTimerCountUpdated += this.GameManager_CountDownTimerCountUpdated;
+            this.gameManager.EndGameMessegeUpdated += this.GameManager_EndGameMessegeUpdated;
+        }
+
+        private void GameManager_EndGameMessegeUpdated(int count)
+        {
+            if (count == 0)
+            {
+                this.winMessage.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.loseMessage.Visibility = Visibility.Visible;
+            }
         }
 
         private void GameManager_CountDownTimerCountUpdated(int count)
